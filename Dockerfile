@@ -33,8 +33,10 @@ RUN curl 'https://codeload.github.com/sysbiomed/glmSparseNet/zip/refs/heads/mast
   && cd .. \
   && rm -rf glmSparseNet-master
 
-RUN touch /entrypoint.R
+// RUN touch /entrypoint.R
 
-WORKDIR /home/rstudio
+// WORKDIR /home/rstudio
 
-ENTRYPOINT sudo -u rstudio -H Rscript /entrypoint.R
+CMD ["/init"]
+
+// ENTRYPOINT sudo -u rstudio -H Rscript /entrypoint.R
