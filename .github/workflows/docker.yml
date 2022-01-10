@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  push:
+    paths-ignore:
+      - last_update.txt
+    branches:
+      - 'master'
+
+  schedule:
+    - cron: '12 9 * * 1/7'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout current repo
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: betashil/r-bioc_devel:latest
+          build-args: |
+            TAG=devel
+      -
+        name: Set credentials for github
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          echo "$(date) devel | latest" >> last_update.txt
+          git add last_update.txt
+          git commit -m "Automatic update"
+      -
+        name: Push changes
+        uses: ad-m/github-push-action@fe38f0a751bf9149f0270cc1fe20bf9156854365
+        with:
+          directory: ./
+          repository:  averissimo/r-base-environment
+          github_token: ${{ secrets.GH_TOKEN }}
