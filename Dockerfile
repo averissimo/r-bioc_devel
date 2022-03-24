@@ -29,6 +29,8 @@ RUN curl 'https://codeload.github.com/sysbiomed/glmSparseNet/zip/refs/heads/mast
   && cd glmSparseNet-master \
   && apt-get update --quiet \
   && Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))' | xargs -I {} bash -c "{} --quiet" \
+  && Rscript -e 'BiocManager::install(remotes::local_package_deps(dependencies = TRUE), Ncpus = 4)' \
+  && Rscript -e 'remotes::install_deps(dependencies = TRUE, Ncpus = 4)' \
   && rm -rf /var/lib/apt/lists/* \
   && cd .. \
   && rm -rf glmSparseNet-master
