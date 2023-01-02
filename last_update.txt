@@ -51,3 +51,4 @@ Mon Dec  5 09:35:10 UTC 2022 devel | latest
 Mon Dec 12 09:35:10 UTC 2022 devel | latest
 Mon Dec 19 09:37:04 UTC 2022 devel | latest
 Mon Dec 26 09:35:48 UTC 2022 devel | latest
+Mon Jan  2 09:41:04 UTC 2023 devel | latest
