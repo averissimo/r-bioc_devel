@@ -225,3 +225,4 @@ Mon May  4 11:30:11 UTC 2026 devel | latest
 Mon May 11 12:34:02 UTC 2026 devel | latest
 Mon May 18 12:52:04 UTC 2026 devel | latest
 Mon May 25 12:49:08 UTC 2026 devel | latest
+Mon Jun  1 15:37:30 UTC 2026 devel | latest
